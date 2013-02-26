@@ -1,0 +1,125 @@
+<!--
+   index.html
+   
+   Copyright 2013 giannis <giannis@giannis64>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Φόρμα Παραγγελίας</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Geany 0.21" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
+	<script>
+		function Calculate(product)
+		{
+		var cost = document.getElementById(product+"Cost");
+		var quantity = document.getElementById(product);
+		var e = document.getElementById(product+"Pack");
+		var Pack = e.options[e.selectedIndex].value;
+		if (product=="patates")
+			cost.innerHTML = Pack*quantity.value*0.4;
+		else if (product=="alevri")
+			cost.innerHTML = Pack*quantity.value*1,5;
+		}
+		
+		function Sum() {
+		var totalCost = document.getElementById("TotalCost");
+		var Cost = parseInt(document.getElementById("patatesCost").innerHTML, 10) + parseInt(document.getElementById("alevriCost").innerHTML, 10);
+		totalCost.innerHTML = Cost;
+		
+		}
+	</script>
+	 <script src="http://code.jquery.com/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+
+<body style="padding:40px">
+	<div class="container">
+	<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+    <a class="brand" href="#">Χωρίς μεσάζοντες ΕΠΑ.Λ. Ελευθερούπολης</a>
+    <ul class="nav">
+    <li class="active"><a href="index.html">Αρχική</a></li>
+    <li><a href="getOrder.php">Αναζήτηση Παραγγελίας</a></li>
+    </ul>
+    </div>
+    </div>
+   <form action="formSubmit.php" method="post"  class="form-horizontal">
+	    <fieldset>
+		<legend>Φόρμα Παραγγελιών</legend>
+	   <label>όνομα</label> <input type="text" name="firstname">
+	   <label>επώνυμο</label> <input type="text" name="lastname">
+	   <label>διεύθυνση:</label> <input type="text" name="address">
+	   <label>τηλέφωνο:</label> <input type="text" name="mobile">
+	  </fieldset>
+	<table class="table">
+		<tr>
+			<th>Δελτίο Παραγγελίας Τροφίμων</th>
+			<th>Συσκευασία</th>
+			<th>Κόστος/συσκευασία</th>
+			<th>Αριθμός Συσκευασιών</th>
+			<th>Σύνολο</th>
+		</tr>
+		<tr>
+			<td>Πατάτες</td>
+			<td>
+				<select name="patatesPack" id="patatesPack">
+					<option value="30">30 Κιλά</option>
+					<option value="20">20 Κιλά</option>
+				</select>
+			</td>
+			<td>20 κιλά =8 ευρώ</td>
+			<td><input type="text" name="patates" id="patates" size="4">
+			</td>
+			<td><button class="btn btn-primary" type="button" onclick="Calculate('patates')">Υπολογισμός</button></td>
+			<td><div id="patatesCost">0</div></td>
+		</tr>
+		<tr>
+			<td>Αλεύρι</td>
+			<td>
+				<select name="alevriPack" id="alevriPack">
+					<option value="5">5 Κιλά</option>
+					<option value="3">3 Κιλά</option>
+				</select>
+			</td>
+			<td>1,5 euro/κιλό</td>
+			<td><input type="text" id="alevri" name='alevri' value="0" size="4">
+			</td>
+			<td><button type="button" onclick="Calculate('alevri')">Υπολογισμός</button></td>
+			<td><div id="alevriCost">0</div></td>
+		</tr>
+		<tr>
+			<td><button type="button" onclick="Sum()">Γενικό σύνολο</button></td>
+			<td><div id="TotalCost">0</div></td>
+		</tr>
+
+		</table>
+		<INPUT TYPE="SUBMIT" class="btn btn-success btn-large" VALUE="Αποστολή">
+		</form>
+		</div>
+</body>
+
+</html>

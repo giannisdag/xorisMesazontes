@@ -1,0 +1,87 @@
+<!--
+   index.html
+   
+   Copyright 2013 giannis <giannis@giannis64>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<title>Φόρμα Παραγγελίας</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Geany 0.21" />
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
+	<script>
+		function Calculate(product)
+		{
+	//	var productName = product.name;
+		var cost = document.getElementById(product+"Cost");
+		var quantity = document.getElementById('patates');
+		var e = document.getElementById(product+"Pack");
+		var Pack = e.options[e.selectedIndex].value;
+		cost.innerHTML = Pack*quantity.value*0.4;
+		}
+	</script>
+</head>
+
+<body>
+	
+	<table>
+		<tr>
+			<th>Δελτίο Παραγγελίας Τροφίμων</th>
+			<th>Συσκευασία</th>
+			<th>Κόστος/συσκευασία</th>
+			<th>Αριθμός Συσκευασιών</th>
+			<th>Σύνολο</th>
+		</tr>
+		<tr>
+			<td>Πατάτες</td>
+			<td>
+				<select id="patatesPack">
+					<option value="30">30 Κιλά</option>
+					<option value="20">20 Κιλά</option>
+				</select>
+			</td>
+			<td>20 κιλά =8 ευρώ</td>
+			<td><input type="text" id="patates" value="3" size="4">
+			</td>
+			<td><button type="button" onclick="Calculate('patates')">Υπολογισμός</button></td>
+			<td><div id="patatesCost">0</div></td>
+		</tr>
+		<tr>
+			<td>Αλεύρι</td>
+			<td>
+				<select id="alevriPack">
+					<option value="5">5 Κιλά</option>
+					<option value="3">3 Κιλά</option>
+				</select>
+			</td>
+			<td>1,5 euro/κιλό</td>
+			<td><input type="text" name="alevri" size="4" onchange="">
+			</td>
+			<td><div id="alevriCost">0</div></td>
+		</tr>
+
+		</table>
+</body>
+
+</html>
